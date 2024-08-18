@@ -1,5 +1,18 @@
 
 function love.load()
+
+    anim8 = require 'libraries/anim8/anim8'
+
+    sprites = {
+        shrimp = love.graphics.newImage("sprites/shrimp.png")
+    }
+
+    local grid = anim8.newGrid(32, 32, sprites.shrimp:getWidth(), sprites.shrimp:getHeight())
+
+    animations = {
+        idle = anim8.newAnimation(grid('1-5', 1), 0.2)
+    }
+
     love.window.setMode(1000, 768)
     buttons = {}
     font = love.graphics.newFont(32)
@@ -24,6 +37,7 @@ function love.update(dt)
         game:update(dt)
         return
     end
+    animations.idle:update(dt)
 end
 
 function love.mousepressed(x, y, button, istouch, mouse, presses)
@@ -37,6 +51,7 @@ function love.mousepressed(x, y, button, istouch, mouse, presses)
 end
 
 function love.draw()
+    love.graphics.draw(love.graphics.newImage("sprites/ocean.jpg"))
     if game then
         game:draw()
         return
@@ -73,6 +88,9 @@ function love.draw()
 
         cursor_y = cursor_y + (buttons_height + margin)
     end
+    love.graphics.setColor(1, 1, 1)
+
+    animations.idle:draw(sprites.shrimp, (window_width/2)-(sprites.shrimp:getWidth()/5), (window_height/4), nil, 3)
 end
 
 function newButton(text, fn)

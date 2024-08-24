@@ -16,4 +16,3 @@ and copy the following file:
 - https://github.com/challacade/udemy-love2d/blob/master/show.lua
 
 then just start main.lua with love
-

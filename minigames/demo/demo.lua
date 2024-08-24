@@ -1,6 +1,7 @@
 local Game = {}
 
-love.window.setMode(800, 600)
+love.window.setMode(800, 600) --, {borderless= true}
+love.window.setTitle("Demo")
 
 function Game:new(o)
     o = o or {}
